@@ -1,13 +1,26 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+
 
 function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Logging in with', { email, password });
-    // Call API here (e.g., using fetch or axios)
+    try{
+      const res = await axios.post("http://localhost:5000/api/login", {email , password} ,
+      {
+        headers:{
+          'Content-Type': 'application/json',
+        }
+      }
+      );
+    }catch(err){
+      res.status(401).send({message:'Invalid credentials'});
+    }
+    
+    
   };
 
   return (
