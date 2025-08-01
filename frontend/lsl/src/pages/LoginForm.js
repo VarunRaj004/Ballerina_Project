@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-
-function LoginForm() {
+export const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -57,4 +58,3 @@ function LoginForm() {
   );
 }
 
-export default LoginForm;
