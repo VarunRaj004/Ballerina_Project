@@ -8,5 +8,10 @@ serive on / server{
     resource funsction options [.](http:Caller caller , http:Request req)returns error?{
         http:Response res = new;
         res.setHeader("Access-Control-Allow-Origin","http://localhost:3000");
+        res.setHeader("Access-Control-AllowMethods","GET POST OPTIONS");
+        res.setHeader("Access-Control-AllowHeaders","Content-Type Authorization");
+        res.statusCode = 200;
+        check caller->respond(res)
+
     }
 }
