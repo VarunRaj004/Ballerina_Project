@@ -12,6 +12,17 @@ serive on / server{
         res.setHeader("Access-Control-AllowHeaders","Content-Type Authorization");
         res.statusCode = 200;
         check caller->respond(res)
-
     }
+
+    resource function post auth(http:Caller caller , http:Request req)returns error? {
+        http:Response | error backendRes = authClient->post("/auth",req);
+        if backendRes is http:Response {
+            backendRes.setHeader("Access-Control-Allow-Origin","http://localhost:3000");
+            check caller->respond(backendRes);
+        }else{
+            check caller->respond({error:"Failed AUth Service"});
+        }
+    }
+
+
 }
